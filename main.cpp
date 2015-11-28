@@ -10,14 +10,26 @@
 #include <GLUT/glut.h>
 void Display();
 void Anim();
-
+void drawWall(double,double,double);
 void Display() {
      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+     drawWall(0,0,0);
+     drawWall(1, 0, 0);
+    
      glFlush();
 }
 
 void Anim() {
     
+}
+void drawWall(double x,double y,double z) {
+    glColor3f(1, 0, 0);
+    glPushMatrix();
+    glTranslatef(x, y, z);
+    glRotated(-90, 0, 0, 1);
+    glScaled(2, 0.2, 4);
+    glutSolidCube(1);
+    glPopMatrix();
 }
 
 int main(int argc, char** argv) {
@@ -39,13 +51,17 @@ int main(int argc, char** argv) {
     glLoadIdentity();
     gluPerspective(45.0f, 800 / 600, 0.1f, 300.0f);
     
-     glEnable(GL_LIGHTING);
-     glEnable(GL_LIGHT0);
-     
-     glLightf(GL_LIGHT0, GL_POSITION, 1.0f);
-     glLightf(GL_LIGHT0, GL_DIFFUSE, 1.0f);
-     glLightf(GL_LIGHT0, GL_AMBIENT, 1.0f);
-     glEnable(GL_NORMALIZE);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    gluLookAt(10.0f, 10.0f, 10.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+//    
+//     glEnable(GL_LIGHTING);
+//     glEnable(GL_LIGHT0);
+//     
+//     glLightf(GL_LIGHT0, GL_POSITION, 1.0f);
+//     glLightf(GL_LIGHT0, GL_DIFFUSE, 1.0f);
+//     glLightf(GL_LIGHT0, GL_AMBIENT, 1.0f);
+//     glEnable(GL_NORMALIZE);
     
     // Enable Lighting for this OpenGL Program
     //  glEnable(GL_LIGHTING);
