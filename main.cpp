@@ -8,35 +8,142 @@
 
 #include <iostream>
 #include <GLUT/glut.h>
+#include <math.h>
 void Display();
 void Anim();
 void drawWall(double,double,double);
+void drawBorders();
+double value = 10;
+double xl = cos(value/60)*8;
+double zl = sin(value/60)*8;
+double yl = 3;
 void Display() {
      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-     drawWall(0,0,0);
-     drawWall(1, 0, 0);
+
+//     glMatrixMode(GL_MODELVIEW);
+//     glLoadIdentity();
+//     gluLookAt(xl,yl, zl, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+    drawBorders();
+  //  for(int i = 0;i<9;i+=5) {
+        glPushMatrix();
+        glTranslatef(0, 0, -3.5);
+        glRotated(45, 0, 0, 1);
+        glScaled(0.2, 7, 0.2);
+        glutSolidCube(1);
+        glPopMatrix();
     
-     glFlush();
+        glPushMatrix();
+        glTranslatef(0, 0, 3.5);
+        glRotated(45, 0, 0, 1);
+        glScaled(0.2, 7, 0.2);
+        glutSolidCube(1);
+        glPopMatrix();
+    
+        glPushMatrix();
+        glTranslatef(-6.8, 0, 0);
+        glScaled(1, 0.2, 10);
+        glutSolidCube(1);
+        glPopMatrix();
+        
+        glPushMatrix();
+        glTranslatef(3.7, 0, 0-0.7);
+        glScaled(0.2, 0.2, 4);
+        glutSolidCube(1);
+        glPopMatrix();
+    
+    // 3rd cube
+//    glPushMatrix();
+//    glTranslatef(3, 0, -3.5);
+//    glRotated(45, 0, 0, 1);
+//    glScaled(0.2, 7, 0.2);
+//    glutSolidCube(1);
+//    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslatef(-3.5, 0, 3);
+    glRotated(45, 0, 0, 1);
+    glScaled(0.2, 5, 0.2);
+    glutSolidCube(1);
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslatef(-3.4, 0, 0);
+    glScaled(0.2, 0.3, 5.2);
+    glutSolidCube(1);
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslatef(2, 0, 0);
+    glScaled(0.2, 0.2, 4);
+    glutSolidCube(1);
+    glPopMatrix();
+
+    
+    //       }
+   glFlush();
 }
 
 void Anim() {
-    
+    value+=1;
 }
 void drawWall(double x,double y,double z) {
     glColor3f(1, 0, 0);
     glPushMatrix();
     glTranslatef(x, y, z);
-    glRotated(-90, 0, 0, 1);
-    glScaled(2, 0.2, 4);
+    //glRotated(-90, 0, 0, 1);
+    glScaled(1.5, 2, 0.2);
     glutSolidCube(1);
     glPopMatrix();
 }
+void drawBorders() {
+    //left wall
+    glColor3f(1, 0, 0);
+    glPushMatrix();
+    glTranslatef(0, 0, 4.56);
+    glRotated(45, 0, 0, 1);
+    glScaled(0.2, 10, 0.2);
+    glutSolidCube(1);
+    glPopMatrix();
+    //right wall
+    glColor3f(1, 0, 0);
+    glPushMatrix();
+    glTranslatef(0, 0, -4.56);
+    glRotated(45, 0, 0, 1);
+    glScaled(0.2, 10, 0.2);
+    glutSolidCube(1);
+    glPopMatrix();
+    
+    //bottom left
+    glColor3f(1, 0, 0);
+    glPushMatrix();
+    glTranslatef(5, 0, 2);
+    glScaled(1, 0.2, 3);
+    glutSolidCube(1);
+    glPopMatrix();
+    
+    //bottom right
+    glColor3f(1, 0, 0);
+    glPushMatrix();
+    glTranslatef(5, 0, -3);
+    glScaled(1, 0.2, 4);
+    glutSolidCube(1);
+    glPopMatrix();
+    //top
+    glColor3f(1, 0, 0);
+    glPushMatrix();
+    glTranslatef(-10.56, 0, 5);
+    glScaled(1, 0.2, 30);
+    glutSolidCube(1);
+    glPopMatrix();
+
+}
+
 
 int main(int argc, char** argv) {
   
     glutInit(&argc, argv);
     
-    glutInitWindowSize(800, 600);
+    glutInitWindowSize(1000, 1000);
     glutInitWindowPosition(250, 250);
     
     glutCreateWindow("Maze");
@@ -49,12 +156,12 @@ int main(int argc, char** argv) {
     
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(45.0f, 800 / 600, 0.1f, 300.0f);
+    gluPerspective(45.0f, 1000 / 1000, 0.1f, 300.0f);
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(10.0f, 10.0f, 10.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-//    
+    gluLookAt(8.0f, 8.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
+//
 //     glEnable(GL_LIGHTING);
 //     glEnable(GL_LIGHT0);
 //     
