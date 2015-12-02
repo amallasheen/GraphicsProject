@@ -13,6 +13,7 @@ void Display();
 void Anim();
 void drawWall(double,double,double);
 void drawFirstCube();
+void drawSecondCube();
 void drawBorders();
 double value = 10;
 double xl = cos(value/60)*8;
@@ -39,51 +40,10 @@ void Display() {
     glColor3f(1, 0, 0);
     drawBorders();
     
-    //1st cube
+    //1st level
     drawFirstCube();
-    
-    // left up
-    glColor3f(1, 0, 0);
-    glPushMatrix();
-    glTranslatef(-3, 0, -0.9);
-    glScaled(0.2, 3, 3);
-    glutSolidCube(1);
-    glPopMatrix();
-    
-    // left down
-    glColor3f(1, 0, 0);
-    glPushMatrix();
-    glTranslatef(-3, 0, 2.1);
-    glScaled(0.2, 3, 1);
-    glutSolidCube(1);
-    glPopMatrix();
-    
-    //bottom
-    glColor3f(1, 0, 0);
-    glPushMatrix();
-    //glRotated(90, 0, 0, 1);
-    glTranslatef(0, 0, 2.5);
-    glRotated(-90, 0, 1, 0);
-    glScaled(0.2, 3, 6);
-    glutSolidCube(1);
-    glPopMatrix();
-    
-    //right
-    glColor3f(1, 0, 0);
-    glPushMatrix();
-    glTranslatef(3, 0, 0.1);
-    glScaled(0.2, 3, 5);
-    glutSolidCube(1);
-    glPopMatrix();
-    
-    glColor3f(1, 0, 0);
-    glPushMatrix();
-    //glRotated(90, 0, 0, 1);
-    glTranslatef(0, 0, -2.3);
-    glRotated(-90, 0, 1, 0);
-    glScaled(0.2, 3, 6);
-    glutSolidCube(1);
-    glPopMatrix();
+    //2nd level
+    drawSecondCube();
     
    glFlush();
 }
@@ -192,6 +152,52 @@ void drawFirstCube() {
     glutSolidCube(1);
     glPopMatrix();
 
+
+}
+
+void drawSecondCube() {
+    // left up
+    glColor3f(1, 0, 0);
+    glPushMatrix();
+    glTranslatef(-3, 0, -0.9);
+    glScaled(0.2, 3, 3);
+    glutSolidCube(1);
+    glPopMatrix();
+    
+    // left down
+    glColor3f(1, 0, 0);
+    glPushMatrix();
+    glTranslatef(-3, 0, 2.1);
+    glScaled(0.2, 3, 1);
+    glutSolidCube(1);
+    glPopMatrix();
+    
+    //bottom
+    glColor3f(1, 0, 0);
+    glPushMatrix();
+    //glRotated(90, 0, 0, 1);
+    glTranslatef(0, 0, 2.5);
+    glRotated(-90, 0, 1, 0);
+    glScaled(0.2, 3, 6);
+    glutSolidCube(1);
+    glPopMatrix();
+    
+    //right
+    glColor3f(1, 0, 0);
+    glPushMatrix();
+    glTranslatef(3, 0, 0.1);
+    glScaled(0.2, 3, 5);
+    glutSolidCube(1);
+    glPopMatrix();
+    
+    glColor3f(1, 0, 0);
+    glPushMatrix();
+    //glRotated(90, 0, 0, 1);
+    glTranslatef(0, 0, -2.3);
+    glRotated(-90, 0, 1, 0);
+    glScaled(0.2, 3, 6);
+    glutSolidCube(1);
+    glPopMatrix();
 
 }
 
