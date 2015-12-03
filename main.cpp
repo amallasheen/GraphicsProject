@@ -18,6 +18,7 @@ void drawThirdCube();
 void drawAddlevel2();
 void drawAddlevel1();
 void drawMaze();
+void drawHome(double x,double y,double z);
 void drawBorders();
 //Maze is drawn in the XZ plane and each wall height is 3 ie y = 3
 
@@ -40,7 +41,7 @@ void Display() {
 //    glPopMatrix();
     
     drawMaze();
-
+    drawHome(-3,10,11);
     
    glFlush();
 }
@@ -54,7 +55,14 @@ void drawMaze() {
     //2nd level
     drawSecondCube();
     //3rd level
-    drawThirdCube();
+    //drawThirdCube();
+}
+void drawHome(double x, double y, double z) {
+    glPushMatrix();
+    glTranslatef(x, y, z);
+    glScalef(5, 10, 1);
+    glutSolidCube(1);
+    glPopMatrix();
 }
 
 
@@ -354,7 +362,7 @@ int main(int argc, char** argv) {
     
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(0.0f, 30.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f);
+    gluLookAt(30.0f, 30.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f);
 //
 //     glEnable(GL_LIGHTING);
 //     glEnable(GL_LIGHT0);
