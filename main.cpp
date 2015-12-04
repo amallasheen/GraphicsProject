@@ -23,17 +23,24 @@ void Key(unsigned char key, int x, int y);
 int sign = 0;
 char dir1 = ' ';
 int dir2 = 0;
-double eyeX = -3.0;
+double eyeX = 2.0;
 double eyeY = -1.0;
 double eyeZ = 1.0;
 double centerY = -1.0;
-double centerX = -13.0;
+double centerX = -8.0;
 double centerZ = 1.0;
 double temp = 0.0;
 int direction = 0;
 int stop_walking = 0;
 double temp_center = 0.0;
 double temp_eye = 0.0;
+int color_effect = 0;
+double color_effect_counter = 0.0;
+void drawSphere();
+void handleRight();
+void handleLeft();
+double speed = 0.0003;
+
 void Display() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -41,6 +48,30 @@ void Display() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, 0.0, 1.0, 0.0);
+    /*GLfloat  light_pos[4] = {eyeX, -1.0, eyeZ, 1.0f};
+    GLfloat spotDir[3] = {centerX*10, -1.0, centerZ*10};
+    GLfloat diffuse[4] = {0, 0, 1, 1.0};
+    GLfloat ambient[4] = {1.0, 1.0, 1.0, 1.0};
+    GLfloat specular[4] = {1.0, 1.0, 1.0, 1.0};*/
+    /*glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glEnable(GL_NORMALIZE);
+    glEnable(GL_COLOR_MATERIAL);
+    glShadeModel(GL_SMOOTH);
+    //glLightModelfv(GL_LIGHT_MODEL_AMBIENT, diffuse);
+    glLightfv (GL_LIGHT0, GL_DIFFUSE, diffuse);
+    glLightfv (GL_LIGHT0, GL_AMBIENT, ambient);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+    glLightfv (GL_LIGHT0, GL_POSITION, light_pos);
+    glLightfv (GL_LIGHT0, GL_SPOT_DIRECTION, spotDir);
+    glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 20.0);
+    glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 100);
+    glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION,1.0);
+    */
+    
+
+
+    
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //these spheres just to define the +ve x and +ve z directions
     //    glPushMatrix();
@@ -59,7 +90,24 @@ void Display() {
     //    glPopMatrix();
     drawMaze();
     drawHome(-3,10,11);
+    drawSphere();
     glFlush();
+}
+void drawSphere(){
+
+    switch(color_effect){
+    case 0: glColor3f(1, 1, 1);break;
+    case 1: glColor3f(0, 1, 0);break;
+    case 2: glColor3f(0, 0, 1);break;
+    case 3: glColor3f(1, 0, 0);break;
+    }
+    
+    glPushMatrix();
+    glTranslatef(eyeX+((centerX-eyeX)/30.0), -1.0, eyeZ+((centerZ-eyeZ)/30.0));
+    glutSolidSphere(0.01,8,10);
+    glPopMatrix();
+
+
 }
 void drawMaze() {
     drawAddlevel2();
@@ -322,14 +370,27 @@ void drawAddlevel1() {
 /*                                            Maze code ends here                             */
 // Anim method here
 void Anim() {
-
+    color_effect_counter+=0.001;
+    if(color_effect_counter >= 30){
+        if(color_effect == 0)
+            color_effect = (int)(rand() % 3)+1;
+        else 
+            color_effect = 0;
+        color_effect_counter = 0.0;
+    }
+    switch(color_effect){
+    case 0: speed = 0.0003;break;
+    case 1: speed = 0.0003;break;
+    case 2: speed = 0.0001;break;
+    case 3: speed = 0.0006;break;
+    }
     // MOVEMENT CODE START
     if(stop_walking == 0){
         switch(direction){
-            case 0:centerX-=0.0003;eyeX-=0.0003;break;
-            case 1:centerZ-=0.0003;eyeZ-=0.0003;break;
-            case 2:centerX+=0.0003;eyeX+=0.0003;break;
-            case 3:centerZ+=0.0003;eyeZ+=0.0003;break;
+            case 0:centerX-=speed;eyeX-=speed;break;
+            case 1:centerZ-=speed;eyeZ-=speed;break;
+            case 2:centerX+=speed;eyeX+=speed;break;
+            case 3:centerZ+=speed;eyeZ+=speed;break;
         }
         }else{
         if(sign == 1 && dir1=='x'){
@@ -396,24 +457,26 @@ int main(int argc, char** argv) {
     glutInitWindowSize(1000, 1000);
     glutInitWindowPosition(250, 250);
     glutCreateWindow("Maze");
+    
     glutDisplayFunc(Display);
     glutIdleFunc(Anim);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glutKeyboardFunc(Key);
     glEnable(GL_DEPTH_TEST);
-    /*   glMatrixMode(GL_PROJECTION);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glEnable(GL_NORMALIZE);
+    glEnable(GL_COLOR_MATERIAL);
+    glShadeModel(GL_SMOOTH);
+      /* glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(45.0f, 1000/1000, 0.1f, 300.0f);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluLookAt(30.0f, 30.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f);
     */
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glEnable(GL_NORMALIZE);
-    glEnable(GL_COLOR_MATERIAL);
-    glShadeModel(GL_SMOOTH);
+    
     // Enable Lighting for this OpenGL Program
     //  glEnable(GL_LIGHTING);
     // Enable Light Source number 0
@@ -437,7 +500,21 @@ int main(int argc, char** argv) {
 void Key(unsigned char key, int x, int y) {
 
     if(key == 'd' || key == 'D'){
-        switch(direction){
+        if(color_effect == 1)
+            handleLeft();
+        else
+            handleRight();
+    }
+    if(key == 'a' || key == 'A'){
+        if(color_effect == 1)
+            handleRight();
+        else
+            handleLeft();
+    }
+    glutPostRedisplay();
+}
+void handleRight(){
+    switch(direction){
             case 0:
                 stop_walking = 1;
                 sign = -1;
@@ -467,9 +544,9 @@ void Key(unsigned char key, int x, int y) {
                 direction = 0;
                 break;
         }
-    }
-    if(key == 'a' || key == 'A'){
-        switch(direction){
+}
+void handleLeft(){
+    switch(direction){
                 case 0:
                 stop_walking = 1;
                 sign = 1;
@@ -499,6 +576,4 @@ void Key(unsigned char key, int x, int y) {
                 direction = 2;
                 break;
         }
-    }
-    glutPostRedisplay();
 }
