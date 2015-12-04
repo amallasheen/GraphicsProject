@@ -370,7 +370,7 @@ void drawAddlevel1() {
 /*                                            Maze code ends here                             */
 // Anim method here
 void Anim() {
-    color_effect_counter+=0.001;
+    color_effect_counter+=0.001*speed_multiplier;
     if(color_effect_counter >= 30){
         if(color_effect == 0)
             color_effect = (int)(rand() % 3)+1;
