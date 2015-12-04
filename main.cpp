@@ -40,7 +40,7 @@ void drawSphere();
 void handleRight();
 void handleLeft();
 double speed = 0.0003;
-double speed_multiplier=2.5;
+double speed_multiplier=10.5;
 void Display() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -74,22 +74,22 @@ void Display() {
     
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //these spheres just to define the +ve x and +ve z directions
-    //    glPushMatrix();
-    //    glColor3f(0, 1, 0);
-    //    glutSolidSphere(0.5, 50, 50);
-    //    glPopMatrix();
-    //    glPushMatrix();
-    //    glTranslatef(3, 0, 0);
-    //    glColor3f(1, 1, 0);
-    //    glutSolidSphere(0.5, 50, 50);
-    //    glPopMatrix();
-    //    glPushMatrix();
-    //    glTranslatef(0, 0, 6.55);
-    //    glColor3f(0, 1, 1);
-    //    glutSolidSphere(0.5, 50, 50);
-    //    glPopMatrix();
+//        glPushMatrix();
+//        glColor3f(0, 1, 0);
+//        glutSolidSphere(0.5, 50, 50);
+//        glPopMatrix();
+//        glPushMatrix();
+//        glTranslatef(3, 0, 0);
+//        glColor3f(1, 1, 0);
+//        glutSolidSphere(0.5, 50, 50);
+//        glPopMatrix();
+//        glPushMatrix();
+//        glTranslatef(0, 0, 6.55);
+//        glColor3f(0, 1, 1);
+//        glutSolidSphere(0.5, 50, 50);
+//        glPopMatrix();
     drawMaze();
-    drawHome(-3,10,11);
+    drawHome(-3,5,11);
     drawSphere();
     glFlush();
 }
@@ -470,13 +470,13 @@ int main(int argc, char** argv) {
     glEnable(GL_NORMALIZE);
     glEnable(GL_COLOR_MATERIAL);
     glShadeModel(GL_SMOOTH);
-      /* glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(45.0f, 1000/1000, 0.1f, 300.0f);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    gluLookAt(30.0f, 30.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f);
-    */
+//       glMatrixMode(GL_PROJECTION);
+//    glLoadIdentity();
+//    gluPerspective(45.0f, 1000/1000, 0.1f, 300.0f);
+//    glMatrixMode(GL_MODELVIEW);
+//    glLoadIdentity();
+//    gluLookAt(30.0f, 30.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f);
+    
     
     // Enable Lighting for this OpenGL Program
     //  glEnable(GL_LIGHTING);
