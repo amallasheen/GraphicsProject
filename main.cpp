@@ -40,7 +40,7 @@ void drawSphere();
 void handleRight();
 void handleLeft();
 double speed = 0.0003;
-
+double speed_multiplier=2.5;
 void Display() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -388,18 +388,18 @@ void Anim() {
     // MOVEMENT CODE START
     if(stop_walking == 0){
         switch(direction){
-            case 0:centerX-=speed;eyeX-=speed;break;
-            case 1:centerZ-=speed;eyeZ-=speed;break;
-            case 2:centerX+=speed;eyeX+=speed;break;
-            case 3:centerZ+=speed;eyeZ+=speed;break;
+            case 0:centerX-=speed*speed_multiplier;eyeX-=speed*speed_multiplier;break;
+            case 1:centerZ-=speed*speed_multiplier;eyeZ-=speed*speed_multiplier;break;
+            case 2:centerX+=speed*speed_multiplier;eyeX+=speed*speed_multiplier;break;
+            case 3:centerZ+=speed*speed_multiplier;eyeZ+=speed*speed_multiplier;break;
         }
         }else{
         if(sign == 1 && dir1=='x'){
-            centerX+=0.01;
+            centerX+=0.01*speed_multiplier;
             if(dir2 == 1){
-                centerZ-=0.01;
+                centerZ-=0.01*speed_multiplier;
                 }else{
-                centerZ+=0.01;
+                centerZ+=0.01*speed_multiplier;
             }
             if(centerX>=eyeX+10){
                 stop_walking = 0;
@@ -408,11 +408,11 @@ void Anim() {
             }
             }else{
             if(sign == -1 && dir1 == 'x'){
-                centerX-=0.01;
+                centerX-=0.01*speed_multiplier;
                 if(dir2 == 1){
-                    centerZ+=0.01;
+                    centerZ+=0.01*speed_multiplier;
                     }else{
-                    centerZ-=0.01;
+                    centerZ-=0.01*speed_multiplier;
                 }
                 if(centerX<=eyeX-10){
                     stop_walking = 0;
@@ -421,11 +421,11 @@ void Anim() {
                 }
                 }else{
                 if(sign == 1 && dir1 == 'z'){
-                    centerZ+=0.01;
+                    centerZ+=0.01*speed_multiplier;
                     if(dir2 == 1){
-                        centerX+=0.01;
+                        centerX+=0.01*speed_multiplier;
                         }else{
-                        centerX-=0.01;
+                        centerX-=0.01*speed_multiplier;
                     }
                     if(centerZ>=eyeZ+10){
                         stop_walking = 0;
@@ -434,11 +434,11 @@ void Anim() {
                     }
                     }else{
                     if(sign == -1 && dir1 == 'z'){
-                        centerZ-=0.01;
+                        centerZ-=0.01*speed_multiplier;
                         if(dir2 == 1){
-                            centerX-=0.01;
+                            centerX-=0.01*speed_multiplier;
                             }else{
-                            centerX+=0.01;
+                            centerX+=0.01*speed_multiplier;
                         }
                         if(centerZ<=eyeZ-10){
                             stop_walking = 0;
