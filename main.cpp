@@ -6,7 +6,7 @@
 //  Copyright © 2015 Amal Lasheen . All rights reserved.
 //
 #include <iostream>
-#include <GLUT/glut.h>
+#include <glut.h>
 #include <math.h>
 void Display();
 void Anim();
@@ -89,7 +89,7 @@ void Display() {
 //        glutSolidSphere(0.5, 50, 50);
 //        glPopMatrix();
     drawMaze();
-    drawHome(-3,3,11);
+    drawHome(-6,3,12);
     drawSphere();
     glFlush();
 }
