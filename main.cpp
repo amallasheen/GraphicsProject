@@ -42,12 +42,12 @@ void handleLeft();
 double speed = 0.0003;
 double speed_multiplier=10.5;
 void Display() {
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(90.0f, 1000/1000, 0.01f, 300.0f);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, 0.0, 1.0, 0.0);
+//    glMatrixMode(GL_PROJECTION);
+//    glLoadIdentity();
+//    gluPerspective(90.0f, 1000/1000, 0.01f, 300.0f);
+//    glMatrixMode(GL_MODELVIEW);
+//    glLoadIdentity();
+//    gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, 0.0, 1.0, 0.0);
     /*GLfloat  light_pos[4] = {eyeX, -1.0, eyeZ, 1.0f};
     GLfloat spotDir[3] = {centerX*10, -1.0, centerZ*10};
     GLfloat diffuse[4] = {0, 0, 1, 1.0};
@@ -89,7 +89,7 @@ void Display() {
 //        glutSolidSphere(0.5, 50, 50);
 //        glPopMatrix();
     drawMaze();
-    drawHome(-3,5,11);
+    drawHome(-3,3,11);
     drawSphere();
     glFlush();
 }
@@ -470,12 +470,12 @@ int main(int argc, char** argv) {
     glEnable(GL_NORMALIZE);
     glEnable(GL_COLOR_MATERIAL);
     glShadeModel(GL_SMOOTH);
-//       glMatrixMode(GL_PROJECTION);
-//    glLoadIdentity();
-//    gluPerspective(45.0f, 1000/1000, 0.1f, 300.0f);
-//    glMatrixMode(GL_MODELVIEW);
-//    glLoadIdentity();
-//    gluLookAt(30.0f, 30.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f);
+       glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(45.0f, 1000/1000, 0.1f, 300.0f);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    gluLookAt(30.0f, 30.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f);
     
     
     // Enable Lighting for this OpenGL Program
