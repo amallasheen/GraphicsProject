@@ -6,7 +6,7 @@
 //  Copyright © 2015 Amal Lasheen . All rights reserved.
 //
 #include <iostream>
-#include <glut.h>
+#include <GLUT/glut.h>
 #include <math.h>
 void Display();
 void Anim();
@@ -73,6 +73,7 @@ void drawMaze() {
     //drawThirdCube();
 }
 void drawHome(double x, double y, double z) {
+    glColor3f(1, 0, 1);
     glPushMatrix();
     glTranslatef(x, y, z);
     glScalef(5, 10, 1);
