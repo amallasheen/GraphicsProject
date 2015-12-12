@@ -6,7 +6,7 @@
 //  Copyright © 2015 Amal Lasheen . All rights reserved.
 //
 #include <iostream>
-#include <glut.h> 
+#include <glut.h>
 #include <math.h>
 void Display();
 void Anim();
@@ -55,7 +55,7 @@ void handleLeft();
 double speed = 0.0003;
 double drunk_var1 = 0.0; int drunk_check1 = 0;
 double drunk_var2 = 0.0; int drunk_check2 = 0;
-double speed_multiplier = 1.5;
+double speed_multiplier = 10.5;
 void Display() {
 	if (!win&&!gameOver){
 		if (GLUT_ELAPSED_TIME % 100000 == 0){
@@ -70,7 +70,7 @@ void Display() {
 		gluPerspective(90.0f, 1000 / 1000, 0.01f, 300.0f);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, 0.0, 1.0, 0.0);
+		gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, drunk_var1, 1.0, drunk_var2);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		drawMaze();
 		drawHome(-3.52, 3.5, 11);
@@ -110,7 +110,7 @@ void Display() {
 		glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 		glClearColor(0.0f, 0.0f, 102.5 / 255.0f, 0.0f);
 
-		glColor3f(0, 1, 0);
+		glColor3f(1, 0, 0);
 		glDepthMask(0);
 		char buffer[255];
 		sprintf_s(buffer, "%s", "Game Over :Bara YA Kalb"); //%d is for integers 
@@ -399,24 +399,26 @@ void drawAddlevel1() {
 // Anim method here
 void Anim() {
 	if (!gameOver&&!win){
-		if(drunk_var1 >= 0.3 || drunk_check1 == 1){
-        drunk_check1 = 1;
-        drunk_var1 -= 0.00002*speed_multiplier;
-        if(drunk_var1 <= -0.3){
-            drunk_check1 = 0;
-        }
-    }else{
-        drunk_var1 += 0.00002*speed_multiplier;
-    }
-    if(drunk_var2 >= 0.3 || drunk_check2 == 1){
-        drunk_check2 = 1;
-        drunk_var2 -= 0.00002*speed_multiplier;
-        if(drunk_var2 <= -0.3){
-            drunk_check2 = 0;
-        }
-    }else{
-        drunk_var2 += 0.00002*speed_multiplier;
-    }
+		if (drunk_var1 >= 0.3 || drunk_check1 == 1){
+			drunk_check1 = 1;
+			drunk_var1 -= 0.00002*speed_multiplier;
+			if (drunk_var1 <= -0.3){
+				drunk_check1 = 0;
+			}
+		}
+		else{
+			drunk_var1 += 0.00002*speed_multiplier;
+		}
+		if (drunk_var2 >= 0.3 || drunk_check2 == 1){
+			drunk_check2 = 1;
+			drunk_var2 -= 0.00002*speed_multiplier;
+			if (drunk_var2 <= -0.3){
+				drunk_check2 = 0;
+			}
+		}
+		else{
+			drunk_var2 += 0.00002*speed_multiplier;
+		}
 		color_effect_counter += 0.001*speed_multiplier;
 		if (color_effect_counter >= 30){
 			if (color_effect == 0)
