@@ -53,6 +53,8 @@ void drawSphere();
 void handleRight();
 void handleLeft();
 double speed = 0.0003;
+double drunk_var1 = 0.0; int drunk_check1 = 0;
+double drunk_var2 = 0.0; int drunk_check2 = 0;
 double speed_multiplier = 1.5;
 void Display() {
 	if (!win&&!gameOver){
@@ -116,6 +118,7 @@ void Display() {
 
 	}
 	glFlush();
+
 }
 void drawSphere(){
 
@@ -396,6 +399,24 @@ void drawAddlevel1() {
 // Anim method here
 void Anim() {
 	if (!gameOver&&!win){
+		if(drunk_var1 >= 0.3 || drunk_check1 == 1){
+        drunk_check1 = 1;
+        drunk_var1 -= 0.00002*speed_multiplier;
+        if(drunk_var1 <= -0.3){
+            drunk_check1 = 0;
+        }
+    }else{
+        drunk_var1 += 0.00002*speed_multiplier;
+    }
+    if(drunk_var2 >= 0.3 || drunk_check2 == 1){
+        drunk_check2 = 1;
+        drunk_var2 -= 0.00002*speed_multiplier;
+        if(drunk_var2 <= -0.3){
+            drunk_check2 = 0;
+        }
+    }else{
+        drunk_var2 += 0.00002*speed_multiplier;
+    }
 		color_effect_counter += 0.001*speed_multiplier;
 		if (color_effect_counter >= 30){
 			if (color_effect == 0)
@@ -771,6 +792,7 @@ int main(int argc, char** argv) {
 	//glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 	//glShadeModel(GL_SMOOTH);
 	glutMainLoop();
+
 }
 void Key(unsigned char key, int x, int y) {
 
