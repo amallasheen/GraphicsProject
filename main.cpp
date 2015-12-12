@@ -41,13 +41,15 @@ void handleRight();
 void handleLeft();
 double speed = 0.0003;
 double speed_multiplier=1.5;
+double drunk_var1 = 0.0; int drunk_check1 = 0;
+double drunk_var2 = 0.0; int drunk_check2 = 0;
 void Display() {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(90.0f, 1000/1000, 0.01f, 300.0f);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, 0.0, 1.0, 0.0);
+    gluLookAt(eyeX, eyeY, eyeZ, centerX, centerY, centerZ, drunk_var1, 1.0, drunk_var2);
     /*GLfloat  light_pos[4] = {eyeX, -1.0, eyeZ, 1.0f};
     GLfloat spotDir[3] = {centerX*10, -1.0, centerZ*10};
     GLfloat diffuse[4] = {0, 0, 1, 1.0};
@@ -371,6 +373,26 @@ void drawAddlevel1() {
 /*                                            Maze code ends here                             */
 // Anim method here
 void Anim() {
+    if(drunk_var1 >= 0.3 || drunk_check1 == 1){
+        drunk_check1 = 1;
+        drunk_var1 -= 0.00002*speed_multiplier;
+        if(drunk_var1 <= -0.3){
+            drunk_check1 = 0;
+        }
+    }else{
+        drunk_var1 += 0.00002*speed_multiplier;
+    }
+    if(drunk_var2 >= 0.3 || drunk_check2 == 1){
+        drunk_check2 = 1;
+        drunk_var2 -= 0.00002*speed_multiplier;
+        if(drunk_var2 <= -0.3){
+            drunk_check2 = 0;
+        }
+    }else{
+        drunk_var2 += 0.00002*speed_multiplier;
+    }
+    
+    
     color_effect_counter+=0.001*speed_multiplier;
     if(color_effect_counter >= 30){
         if(color_effect == 0)
@@ -470,6 +492,7 @@ int main(int argc, char** argv) {
     glEnable(GL_NORMALIZE);
     glEnable(GL_COLOR_MATERIAL);
     glShadeModel(GL_SMOOTH);
+
    /* glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(45.0f, 1000/1000, 0.1f, 300.0f);
@@ -477,6 +500,7 @@ int main(int argc, char** argv) {
     glLoadIdentity();
     gluLookAt(0.0f, 30.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f);
     */
+
     
     // Enable Lighting for this OpenGL Program
     //  glEnable(GL_LIGHTING);
